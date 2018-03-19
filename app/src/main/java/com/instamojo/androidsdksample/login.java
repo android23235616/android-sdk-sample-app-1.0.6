@@ -35,6 +35,7 @@ public class login extends AppCompatActivity {
     String username, mobile;
     RelativeLayout loginLayout, otpLayout;
     ProgressDialog progress;
+    TextView txtMobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,7 @@ public class login extends AppCompatActivity {
 
     }
 
-    private void startLogin(String username, String mobile) {
+    private void startLogin(String username, final String mobile) {
         ///////////////////To Do: CODE TO SEND OTP///////////////////
 
 
@@ -105,6 +106,7 @@ public class login extends AppCompatActivity {
                         Toast.makeText(login.this, "OTP SENT SUCCESSFULLY", Toast.LENGTH_SHORT).show();
                         loginLayout.setVisibility(View.GONE);
                         otpLayout.setVisibility(View.VISIBLE);
+                        txtMobile.setText(mobile);
                     }
                     else
                     {
@@ -158,6 +160,7 @@ public class login extends AppCompatActivity {
         btnVerifyOTP = (Button) findViewById(R.id.btnVerifyOTP);
         loginLayout = (RelativeLayout)findViewById(R.id.login_details_layout);
         otpLayout = (RelativeLayout)findViewById(R.id.otp_layout);
+        txtMobile = (TextView) findViewById(R.id.txt_mobile);
 
         // Set visibilities:
         loginLayout.setVisibility(View.VISIBLE);
