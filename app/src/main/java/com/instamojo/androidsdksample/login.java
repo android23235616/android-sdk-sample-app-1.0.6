@@ -1,5 +1,6 @@
 package com.instamojo.androidsdksample;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.net.InetAddress;
@@ -23,6 +34,7 @@ public class login extends AppCompatActivity {
     Button btnLogin, btnVerifyOTP;
 
     RelativeLayout loginLayout, otpLayout;
+    ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +47,7 @@ public class login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(check_internet_connection())
+                if(!check_internet_connection())
                 {   final String username, mobile;
                     username = etUserName.getText().toString();
                     mobile = etMobile.getText().toString();
@@ -73,6 +85,47 @@ public class login extends AppCompatActivity {
         ///////////////////To Do: CODE TO SEND OTP///////////////////
 
 
+       if(!progress.isShowing())
+       {
+           progress.show();
+       }
+
+        StringRequest str=new StringRequest(Request.Method.GET, "https://control.msg91.com/api/sendotp.php?authkey=204505AOZvMjzt5aaff3e5&mobile="+mobile+"&message=Your%20OTP%20is%20%23%23OTP%23%23%20.%20It%20is%20Valid%20for%203%20minutes%20only.&sender=AVTARSS&otp_expiry=3", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(progress.isShowing())
+                {
+                    progress.dismiss();
+                }
+                try {
+                    JSONObject a=new JSONObject(response);
+                    String s=a.getString("type");
+                    if(s.equalsIgnoreCase("success"))
+                    {
+                        Toast.makeText(login.this, "OTP SENT SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(login.this, "Please Try Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(progress.isShowing())
+                {
+                    progress.dismiss();
+                }
+                Toast.makeText(login.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue queue= Volley.newRequestQueue(getApplicationContext());
+        queue.add(str);
 
     }
 
@@ -107,6 +160,8 @@ public class login extends AppCompatActivity {
         // Set visibilities:
         loginLayout.setVisibility(View.VISIBLE);
         otpLayout.setVisibility(View.GONE);
+        progress=new ProgressDialog(this);
+        progress.setMessage("Please wait.");
     }
     
 }
