@@ -54,19 +54,14 @@ public class login extends AppCompatActivity {
                     username = etUserName.getText().toString();
                     mobile = etMobile.getText().toString();
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(login.this);
-                    builder.setTitle("Message");
-                    builder.setMessage("OTP will be sent to +91-"+mobile+" for verification. Do you want to continue?");
-                    builder.setPositiveButton("PROCEED", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startLogin(username, mobile);
-                        }
-                    });
+                    if(username.contains("-")){
+                        fetchBhamashah(username, mobile);
+                    }
+                    else {
 
-                    builder.setNegativeButton("CANCEL", null);
+                        mobileLogin(username, mobile);
 
-                    builder.show();
+                    }
 
                 }
             }
@@ -87,6 +82,67 @@ public class login extends AppCompatActivity {
                 startActivity(new Intent(login.this, registration.class));
             }
         });
+
+    }
+
+    private void mobileLogin(final String username, final String mobile) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(login.this);
+        builder.setTitle("Message");
+        builder.setMessage("OTP will be sent to +91-" + mobile + " for verification. Do you want to continue?");
+        builder.setPositiveButton("PROCEED", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startLogin(username, mobile);
+            }
+        });
+
+        builder.setNegativeButton("CANCEL", null);
+
+        builder.show();
+
+    }
+
+    private void fetchBhamashah(final String familyID, final String mobile) {
+
+        Toast.makeText(this, "Bhamashah Mode", Toast.LENGTH_SHORT).show();
+
+        String URL = "https://apitest.sewadwaar.rajasthan.gov.in/app/live/Service/hofAndMember/ForApp/"+familyID+"?client_id=ad7288a4-7764-436d-a727-783a977f1fe1";
+        StringRequest req=new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(progress.isShowing())
+                {
+                    progress.dismiss();
+                }
+                try {
+                    JSONObject a=new JSONObject(response);
+                    JSONObject details = a.getJSONObject("hof_details");
+                    String aadharID = details.getString("AADHAR_ID");
+                    String name = details.getString("NAME_ENG");
+                    String mobile = details.getString("MOBILE_NO");
+                    Toast.makeText(login.this, "Mobile: "+mobile+"\nName: "+name, Toast.LENGTH_LONG).show();
+                    mobileLogin(username, mobile);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(progress.isShowing())
+                {
+                    progress.dismiss();
+                }
+                Toast.makeText(login.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue q= Volley.newRequestQueue(getApplicationContext());
+        q.add(req);
+
 
     }
 
