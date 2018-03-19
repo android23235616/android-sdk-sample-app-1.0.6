@@ -23,7 +23,7 @@
         android:id="@+id/aadhar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="26dp"
         android:ems="12"
         android:hint="Aadhar Number"
         android:gravity="center"
@@ -35,7 +35,7 @@
         android:id="@+id/phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Mobile number"
         android:gravity="center"
@@ -48,8 +48,21 @@
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/phone"
+        android:text="Register"
+        android:layout_below="@+id/username"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="83dp"
-        android:text="Register" />
+        android:layout_marginTop="76dp" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:hint="Username"
+        android:layout_below="@+id/phone"
+        android:layout_alignLeft="@+id/phone"
+        android:layout_alignStart="@+id/phone" />
 </RelativeLayout>
