@@ -54,7 +54,7 @@ public class login extends AppCompatActivity {
 
         name=(TextView) findViewById(R.id.name);
         password=(TextView) findViewById(R.id.password);
-        register=(Button) findViewById(R.id.Register);
+        register=(Button) findViewById(R.id.btnLogin);
 
     }
 }

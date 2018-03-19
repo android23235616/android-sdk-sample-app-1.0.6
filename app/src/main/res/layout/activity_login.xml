@@ -17,9 +17,27 @@
         >
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/logo"
+            android:layout_above="@+id/txt_avatar"
+            android:src="@drawable/ic_placeholder"
+            android:layout_marginBottom="28dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:id="@+id/txt_avatar"
+            android:layout_marginBottom="48dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_alignParentBottom="true"
+            android:text="Advanced Vehicle Tracking and\nAgile Recovery System \n(AVTAR)"
             />
 
     </RelativeLayout>
@@ -58,7 +76,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="8dp"
                 android:inputType="textPersonName"
-                android:hint="Enter SSOSID"
+                android:hint="Username/Bhamashah ID"
                 android:background="@null"
                 android:layout_above="@+id/password"
                 android:layout_centerHorizontal="true" />
@@ -79,7 +97,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_lock"
+                android:src="@drawable/ic_mobile"
                 />
 
             <TextView
@@ -100,6 +118,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:background="@null"
+                android:inputType="phone"
                 android:hint="Mobile Number"
             />
 
@@ -109,7 +128,7 @@
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Login with Bhamashah"
+            android:text="Login to AVTAR"
             android:textColor="@android:color/white"
             android:backgroundTint="@color/primary_color"
             android:layout_marginTop="28dp"
@@ -120,11 +139,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btnLogin"
+            android:gravity="center"
             android:layout_marginTop="12dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Don't have Bhamashah account?"
+                android:text="Don't have an AVATAR account?"
                 />
 
             <TextView
@@ -132,6 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:id="@+id/txt_register"
+                android:gravity=""
                 android:text="Click here to register"
                 android:textColor="@color/primary_color"
                 />
