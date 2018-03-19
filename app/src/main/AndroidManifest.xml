@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.instamojo.androidsdksample">
 
@@ -7,17 +8,12 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-
-
-
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name="com.instamojo.android.InstamojoApplication"
@@ -26,7 +22,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
@@ -40,7 +35,6 @@
             android:name=".CustomUIActivity"
             android:label="Choose Payment method"
             android:screenOrientation="portrait" />
-
         <activity android:name=".QR_SCANNING">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,11 +46,9 @@
         <service
             android:name=".WiFiCheckService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
 
-
+        <activity android:name=".login"></activity>
     </application>
-
-
 
 </manifest>
