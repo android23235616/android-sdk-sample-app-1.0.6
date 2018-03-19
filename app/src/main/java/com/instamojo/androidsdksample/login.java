@@ -155,7 +155,7 @@ public class login extends AppCompatActivity {
            progress.show();
        }
 
-        StringRequest str=new StringRequest(Request.Method.GET, "https://control.msg91.com/api/sendotp.php?authkey=204505AOZvMjzt5aaff3e5&mobile="+mobile+"&message=Your%20OTP%20is%20%23%23OTP%23%23%20.%20It%20is%20Valid%20for%203%20minutes%20only.&sender=AVTARSS&otp_expiry=3", new Response.Listener<String>() {
+        StringRequest str=new StringRequest(Request.Method.GET, "https://control.msg91.com/api/sendotp.php?authkey=204505AOZvMjzt5aaff3e5&mobile="+mobile+"&message=Your%20OTP%20is%20%23%23OTP%23%23%20.%20It%20is%20Valid%20for%203%20minutes%20only.&sender=AVTARSS&otp_expiry=10", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(progress.isShowing())
@@ -198,9 +198,48 @@ public class login extends AppCompatActivity {
     }
 
     private void verifyOTP(String mobile, String otp){
-        //////////////////To Do: CODE TO VERIFY OTP///////////////////
+        if(progress.isShowing())
+        {
+            progress.dismiss();
+        }
+        progress.setMessage("Verifying OTP.Please Wait");
+        progress.show();
+        StringRequest st=new StringRequest(Request.Method.GET, "https://control.msg91.com/api/verifyRequestOTP.php?authkey=204505AOZvMjzt5aaff3e5&mobile=" + mobile + "&otp=" + otp, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(progress.isShowing())
+                { progress.dismiss();
+                }
+                try {
+                    JSONObject a=new JSONObject(response);
+                    String d=a.getString("type");
+                    if(d.equalsIgnoreCase("success"))
+                    {
+                        Intent a1=new Intent(getApplicationContext(),QRScanningActivity.class);
+                        a1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(a1);
+                    }
+                    else{
+                        Toast.makeText(login.this, "OTP IS NOT CORRECT OR IT IS EXPIRED", Toast.LENGTH_SHORT).show();
+                    }
 
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(progress.isShowing())
+                {
+                    progress.dismiss();
+                }
+            }
+        });
+
+        RequestQueue a=Volley.newRequestQueue(getApplicationContext());
+        a.add(st);
     }
 
     private boolean check_internet_connection() {
