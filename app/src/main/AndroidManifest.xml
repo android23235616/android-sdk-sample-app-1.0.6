@@ -41,9 +41,10 @@
             android:label="Choose Payment method"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".QRScanningActivity">
+        <activity android:name=".QR_SCANNING">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -52,13 +53,6 @@
             android:name=".WiFiCheckService"
             android:enabled="true"
             android:exported="true"/>
-
-        <activity
-            android:name=".CaptureActivityPortrait"
-            android:screenOrientation="portrait"
-            android:stateNotNeeded="true"
-            android:theme="@style/zxing_CaptureTheme"
-            android:windowSoftInputMode="stateAlwaysHidden" />
 
 
     </application>

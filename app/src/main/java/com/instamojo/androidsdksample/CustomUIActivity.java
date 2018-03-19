@@ -129,7 +129,6 @@ public class CustomUIActivity extends AppCompatActivity {
 
         }
     }
-
     private void proceedWithCard(Order order, Card card) {
         final ProgressDialog dialog = ProgressDialog.show(this, "",
                 getString(com.instamojo.android.R.string.please_wait), true, false);
