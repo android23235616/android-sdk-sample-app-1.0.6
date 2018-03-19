@@ -58,7 +58,6 @@ public class login extends AppCompatActivity {
 
     private void register_python(String ssoid, String pass) {
 
-
         StringRequest strngrqst=new StringRequest(Request.Method.GET, "", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
