@@ -28,11 +28,14 @@ public class login extends AppCompatActivity {
             public void onClick(View view) {
                 if(check_internet_connection())
                 {
-
+                    register_python();
                 }
             }
         });
 
+    }
+
+    private void register_python() {
     }
 
     private boolean check_internet_connection() {
@@ -48,8 +51,7 @@ public class login extends AppCompatActivity {
     }
 
     private void initialize() {
-        phone=(TextView) findViewById(R.id.phone);
-        email=(TextView) findViewById(R.id.email);
+
         name=(TextView) findViewById(R.id.name);
         password=(TextView) findViewById(R.id.password);
         register=(Button) findViewById(R.id.Register);
