@@ -6,63 +6,99 @@
     android:layout_height="match_parent"
     tools:context="com.instamojo.androidsdksample.registration">
 
+    <include layout="@layout/my_toolbar" android:id="@+id/toolbar"/>
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="73dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Name"
-        android:gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_below="@+id/toolbar"
+        >
 
-    <EditText
-        android:id="@+id/aadhar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:ems="12"
-        android:hint="Aadhar Number"
-        android:gravity="center"
-        android:inputType="phone"
-        android:layout_below="@+id/name"
-        android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:id="@+id/phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Mobile number"
-        android:gravity="center"
-        android:inputType="textPostalAddress"
-        android:layout_below="@+id/aadhar"
-        android:layout_alignLeft="@+id/name"
-        android:layout_alignStart="@+id/name" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            >
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Name"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_below="@+id/username"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="76dp" />
+        </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="textPersonName"
-        android:hint="Username"
-        android:layout_below="@+id/phone"
-        android:layout_alignLeft="@+id/phone"
-        android:layout_alignStart="@+id/phone" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <EditText
+                android:id="@+id/aadhar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:ems="12"
+                android:hint="Aadhar Number"
+                android:inputType="phone"
+                android:layout_below="@+id/name"
+                android:layout_centerHorizontal="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="Mobile number"
+                android:inputType="textPostalAddress"
+                android:layout_below="@+id/aadhar"
+                android:layout_alignLeft="@+id/name"
+                android:layout_alignStart="@+id/name" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Username"
+                android:layout_below="@+id/phone"
+                android:layout_alignLeft="@+id/phone"
+                android:layout_alignStart="@+id/phone" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/primary_color"
+            android:textColor="@android:color/white"
+            android:text="Register"
+            android:layout_below="@+id/username"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="76dp" />
+
+    </LinearLayout>
+
 </RelativeLayout>
