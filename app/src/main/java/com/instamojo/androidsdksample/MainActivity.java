@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -38,6 +39,8 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    Toolbar toolbar;
+
     private static final HashMap<String, String> env_options = new HashMap<>();
 
     static {
@@ -54,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Complete Payment");
+
         Button button = (Button) findViewById(R.id.pay);
         nameBox = (AppCompatEditText) findViewById(R.id.name);
         nameBox.setSelection(nameBox.getText().toString().trim().length());
@@ -82,10 +89,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        envSpinner.setSelection(1);
 
         dialog = new ProgressDialog(this);
         dialog.setIndeterminate(true);
-        dialog.setMessage("please wait...");
+        dialog.setMessage("Please Wait...");
         dialog.setCancelable(false);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

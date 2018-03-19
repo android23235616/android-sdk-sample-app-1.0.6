@@ -35,7 +35,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class QR_SCANNING extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class QRScanningActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     Button scan_qr;
     Button endTrip;
@@ -76,7 +76,7 @@ public class QR_SCANNING extends AppCompatActivity implements GoogleApiClient.Co
         updateUI();
 
         mContext = getApplicationContext();
-        serviceIntent = new Intent(QR_SCANNING.this, WiFiCheckService.class);
+        serviceIntent = new Intent(QRScanningActivity.this, WiFiCheckService.class);
 
         //setting onClick Listener of android
         scan_qr.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +85,8 @@ public class QR_SCANNING extends AppCompatActivity implements GoogleApiClient.Co
 
             public void onClick(View view) {
 
-                qrscan.initiateScan();
+                //qrscan.initiateScan();
+                startScan();
 
             }
 
@@ -128,7 +129,7 @@ public class QR_SCANNING extends AppCompatActivity implements GoogleApiClient.Co
                     Display(result.getContents());
                     JSONObject obj = new JSONObject(result.getContents());
                     chasis = obj.getString("chasis_number");
-                    constants.CHASSIS = chasis;
+                    Constants.CHASSIS = chasis;
                     progress.setMessage("Do not minimize the screen. Please Wait");
                     progress.setCancelable(false);
                     progress.show();
@@ -159,7 +160,7 @@ public class QR_SCANNING extends AppCompatActivity implements GoogleApiClient.Co
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //Intent serviceIntent = new Intent(QR_SCANNING.this, WiFiCheckService.class);
+        //Intent serviceIntent = new Intent(QRScanningActivity.this, WiFiCheckService.class);
         stopService(serviceIntent);
 
     }
@@ -167,11 +168,11 @@ public class QR_SCANNING extends AppCompatActivity implements GoogleApiClient.Co
     private void fetch_vehicle_wifi_mac(final String chasis, String lat, String lon, String SSO) {
         //add volley in this for getting the mac address of the wifi
         String URL = "";
-        if(constants.tripStarted == false){
-            URL = constants.qr_send_url_to_get_ap + "?chesis=" + chasis+"&ssos=1234"+"&lat="+lat+"&lng="+lon;
+        if(Constants.tripStarted == false){
+            URL = Constants.qr_send_url_to_get_ap + "?chesis=" + chasis+"&ssos=1234"+"&lat="+lat+"&lng="+lon;
         }
-        else if(constants.tripStarted == true){
-            URL = constants.url_stop_trip + "?chesis=" + chasis+"&ssos=1234"+"&lat="+lat+"&lng="+lon;
+        else if(Constants.tripStarted == true){
+            URL = Constants.url_stop_trip + "?chesis=" + chasis+"&ssos=1234"+"&lat="+lat+"&lng="+lon;
         }
 
         StringRequest stringReques = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
@@ -180,17 +181,17 @@ public class QR_SCANNING extends AppCompatActivity implements GoogleApiClient.Co
                 //       progress.dismiss();
                 Display(response);
 
-                if(constants.tripStarted == false) {
+                if(Constants.tripStarted == false) {
                     Display("Starting service");
-                    constants.vehicleMAC = response;
+                    Constants.vehicleMAC = response;
                     startService(serviceIntent);
-                    constants.tripStarted = true;
+                    Constants.tripStarted = true;
                 }
 
-                else if(constants.tripStarted == true){
+                else if(Constants.tripStarted == true){
                     Display("Stopping service");
                     //stopService(serviceIntent);
-                    //constants.tripStarted = false;
+                    //Constants.tripStarted = false;
                     android.os.Process.killProcess(android.os.Process.myPid());
                     Toast.makeText(getApplicationContext(), "App stopped", Toast.LENGTH_SHORT).show();
                     //finish();
@@ -212,12 +213,12 @@ public class QR_SCANNING extends AppCompatActivity implements GoogleApiClient.Co
 
     private void updateUI() {
 
-        if(constants.tripStarted == false){
+        if(Constants.tripStarted == false){
             scan_qr.setVisibility(View.VISIBLE);
             endTrip.setVisibility(View.INVISIBLE);
             btnPay.setVisibility(View.INVISIBLE);
         }
-        else if(constants.tripStarted == true){
+        else if(Constants.tripStarted == true){
             scan_qr.setVisibility(View.INVISIBLE);
             endTrip.setVisibility(View.VISIBLE);
             btnPay.setVisibility(View.VISIBLE);
@@ -264,11 +265,11 @@ public class QR_SCANNING extends AppCompatActivity implements GoogleApiClient.Co
                 }
                 else
                 {
-                    Toast.makeText(QR_SCANNING.this, "QR IS NOT VALID", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QRScanningActivity.this, "QR IS NOT VALID", Toast.LENGTH_SHORT).show();
                 }
                 mGoogleApiClient.disconnect();
             } else {
-                Toast.makeText(QR_SCANNING.this, "Please Try Again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(QRScanningActivity.this, "Please Try Again", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -341,7 +342,7 @@ public class QR_SCANNING extends AppCompatActivity implements GoogleApiClient.Co
     private void updateData(String[] res) {
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String URL = constants.url_stop_trip+"?chesis="+constants.CHASSIS+"&ssos=1234"+"&lat="+res[0]+"&lng="+res[1];
+        String URL = Constants.url_stop_trip+"?chesis="+ Constants.CHASSIS+"&ssos=1234"+"&lat="+res[0]+"&lng="+res[1];
 
         Toast.makeText(this, "Requesting URL: "+URL, Toast.LENGTH_LONG).show();
 
@@ -362,7 +363,7 @@ public class QR_SCANNING extends AppCompatActivity implements GoogleApiClient.Co
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(QR_SCANNING.this, "Error: "+error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(QRScanningActivity.this, "Error: "+error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -394,11 +395,11 @@ public class QR_SCANNING extends AppCompatActivity implements GoogleApiClient.Co
                 }
                 else
                 {
-                    Toast.makeText(QR_SCANNING.this, "QR IS NOT VALID", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QRScanningActivity.this, "QR IS NOT VALID", Toast.LENGTH_SHORT).show();
                 }
                 mGoogleApiClient.disconnect();
             } else {
-                Toast.makeText(QR_SCANNING.this, "Please Try Again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(QRScanningActivity.this, "Please Try Again", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -406,5 +407,17 @@ public class QR_SCANNING extends AppCompatActivity implements GoogleApiClient.Co
 
 */
 
+
+    private void startScan() {
+        IntentIntegrator integrator = new IntentIntegrator(QRScanningActivity.this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+        integrator.setBeepEnabled(true);
+        integrator.setCameraId(0);
+        integrator.setPrompt("Place the barcode inside the viewfinder to scan it.");
+        integrator.setBarcodeImageEnabled(false);
+        integrator.setCaptureActivity(CaptureActivityPortrait.class);
+        integrator.setOrientationLocked(false);
+        integrator.initiateScan();
+    }
 
 }

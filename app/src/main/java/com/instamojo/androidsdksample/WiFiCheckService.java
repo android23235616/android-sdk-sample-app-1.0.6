@@ -185,7 +185,7 @@ public class WiFiCheckService extends Service implements GoogleApiClient.Connect
     private final BroadcastReceiver mWifiScanner=new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION) && constants.vehicleMAC != null) {
+            if (intent.getAction().equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION) && Constants.vehicleMAC != null) {
                 List<ScanResult> mScanResults = wifimanager.getScanResults();
                 //Toast.makeText(context, mScanResults.get(0).BSSID, Toast.LENGTH_SHORT).show();
 
@@ -193,7 +193,7 @@ public class WiFiCheckService extends Service implements GoogleApiClient.Connect
                 for (int i = 0; i < mScanResults.size(); i++){
                     //Toast.makeText(WiFiCheckService.this, ""+mScanResults.get(i).BSSID, Toast.LENGTH_LONG).show();
 
-                    if(mScanResults.get(i).BSSID.toString().equalsIgnoreCase(constants.vehicleMAC)){
+                    if(mScanResults.get(i).BSSID.toString().equalsIgnoreCase(Constants.vehicleMAC)){
 
                         Toast.makeText(WiFiCheckService.this, ""+mScanResults.get(i).level+" dB", Toast.LENGTH_LONG).show();
                         prev = 1;
@@ -209,7 +209,7 @@ public class WiFiCheckService extends Service implements GoogleApiClient.Connect
 /////////////////////////////////////////////To Do: WiFi Disconnected, update data////////////////////////////////////////////////
                     Toast.makeText(WiFiCheckService.this, "WiFi Disconnected", Toast.LENGTH_SHORT).show();
                     //getCurrentLocation();
-                    QR_SCANNING.getCurrentLocation();
+                    QRScanningActivity.getCurrentLocation();
                 }
 
                 if(flag == 0 && prev == 0){
@@ -222,7 +222,7 @@ public class WiFiCheckService extends Service implements GoogleApiClient.Connect
     private void updateData(String[] res) {
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String URL = constants.url_stop_trip+"?chesis="+constants.CHASSIS+"&ssos="+SSOS+"&lat="+res[0]+"&lng="+res[1];
+        String URL = Constants.url_stop_trip+"?chesis="+ Constants.CHASSIS+"&ssos="+SSOS+"&lat="+res[0]+"&lng="+res[1];
 
         Toast.makeText(this, "Requesting URL: "+URL, Toast.LENGTH_LONG).show();
 
@@ -236,7 +236,7 @@ public class WiFiCheckService extends Service implements GoogleApiClient.Connect
                     flag = 0;
                     prev = 0;
 
-                    QR_SCANNING.mContext.stopService(QR_SCANNING.serviceIntent);
+                    QRScanningActivity.mContext.stopService(QRScanningActivity.serviceIntent);
 
 
                 } catch (JSONException e) {
