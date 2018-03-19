@@ -2,6 +2,7 @@ package com.instamojo.androidsdksample;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,7 +36,7 @@ public class login extends AppCompatActivity {
     String username, mobile;
     RelativeLayout loginLayout, otpLayout;
     ProgressDialog progress;
-    TextView txtMobile;
+    TextView txtMobile, txtRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,13 @@ public class login extends AppCompatActivity {
             public void onClick(View v) {
                 String otp = etOTP.getText().toString();
                 verifyOTP(mobile, otp);
+            }
+        });
+
+        txtRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(login.this, registration.class));
             }
         });
 
@@ -161,6 +169,7 @@ public class login extends AppCompatActivity {
         loginLayout = (RelativeLayout)findViewById(R.id.login_details_layout);
         otpLayout = (RelativeLayout)findViewById(R.id.otp_layout);
         txtMobile = (TextView) findViewById(R.id.txt_mobile);
+        txtRegister = (TextView) findViewById(R.id.txt_register);
 
         // Set visibilities:
         loginLayout.setVisibility(View.VISIBLE);
