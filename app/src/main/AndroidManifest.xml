@@ -41,7 +41,7 @@
             android:label="Choose Payment method"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".QR_SCANNING">
+        <activity android:name=".QRScanningActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
