@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,6 +31,7 @@ public class registration extends AppCompatActivity {
             public void onClick(View view) {
                 if(check_internet())
                 {
+                    Toast.makeText(registration.this, "Processing", Toast.LENGTH_SHORT).show();
                     String uname=username.getText().toString();
                     String nme=name.getText().toString();
                     String phn=phone.getText().toString();
@@ -44,15 +46,15 @@ public class registration extends AppCompatActivity {
     private void register_python(String uname, String nme, String phn, String adha) {
 
 
-        StringRequest st=new StringRequest(Request.Method.GET, Constants.url_registration+"?uname="+uname+"&nme="+nme+"&phn="+phn+"&adha="+adha, new Response.Listener<String>() {
+        StringRequest st=new StringRequest(Request.Method.GET, Constants.url_registration+"?username="+uname+"&name="+nme+"&mobile="+phn+"&ssos="+adha+"&pwd="+"1234", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                Toast.makeText(registration.this, response, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(registration.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
