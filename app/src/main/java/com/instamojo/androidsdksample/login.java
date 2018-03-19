@@ -32,7 +32,7 @@ public class login extends AppCompatActivity {
     //mobile number
     EditText etMobile,etUserName,etOTP;
     Button btnLogin, btnVerifyOTP;
-
+    String username, mobile;
     RelativeLayout loginLayout, otpLayout;
     ProgressDialog progress;
 
@@ -48,7 +48,7 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!check_internet_connection())
-                {   final String username, mobile;
+                {
                     username = etUserName.getText().toString();
                     mobile = etMobile.getText().toString();
 
@@ -75,7 +75,7 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String otp = etOTP.getText().toString();
-                verifyOTP(otp);
+                verifyOTP(mobile, otp);
             }
         });
 
@@ -103,6 +103,8 @@ public class login extends AppCompatActivity {
                     if(s.equalsIgnoreCase("success"))
                     {
                         Toast.makeText(login.this, "OTP SENT SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+                        loginLayout.setVisibility(View.GONE);
+                        otpLayout.setVisibility(View.VISIBLE);
                     }
                     else
                     {
@@ -129,7 +131,7 @@ public class login extends AppCompatActivity {
 
     }
 
-    private void verifyOTP(String otp){
+    private void verifyOTP(String mobile, String otp){
         //////////////////To Do: CODE TO VERIFY OTP///////////////////
 
 
