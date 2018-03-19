@@ -12,4 +12,5 @@
     <string name="test_description">Test description</string>
     <string name="pay">Pay</string>
     <string name="update_token">Update token</string>
+    <string name="title_activity_avtar_rating">Map</string>
 </resources>
