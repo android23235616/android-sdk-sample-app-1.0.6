@@ -1,10 +1,12 @@
 package com.instamojo.androidsdksample;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,22 +21,27 @@ public class registration extends AppCompatActivity {
 
     EditText name,adhar,phone,username;
     Button register;
+    ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
         initialize();
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(check_internet())
+                if(!check_internet())
                 {
+
+                    Toast.makeText(registration.this, "Processing", Toast.LENGTH_SHORT).show();
                     String uname=username.getText().toString();
                     String nme=name.getText().toString();
                     String phn=phone.getText().toString();
                     String adha=adhar.getText().toString();
                     register_python(uname,nme,phn,adha);
+                    progress.show();
                 }
             }
         });
@@ -43,16 +50,23 @@ public class registration extends AppCompatActivity {
 
     private void register_python(String uname, String nme, String phn, String adha) {
 
-
-        StringRequest st=new StringRequest(Request.Method.GET, Constants.url_registration+"?uname="+uname+"&nme="+nme+"&phn="+phn+"&adha="+adha, new Response.Listener<String>() {
+        StringRequest st=new StringRequest(Request.Method.GET, Constants.url_registration+"?username="+uname+"&name="+nme+"&mobile="+phn+"&ssos="+adha+"&pwd="+"1234", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                if(progress.isShowing())
+                {
+                    progress.dismiss();
+                }
+                Toast.makeText(registration.this, response, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                if(progress.isShowing())
+                {
+                    progress.dismiss();
+                }
+                Toast.makeText(registration.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -77,5 +91,7 @@ public class registration extends AppCompatActivity {
         phone=(EditText)findViewById(R.id.phone);
         username=(EditText) findViewById(R.id.username);
         register=(Button)findViewById(R.id.register);
+        progress=new ProgressDialog(getApplicationContext());
+        progress.setMessage("Please Wait");
     }
 }
