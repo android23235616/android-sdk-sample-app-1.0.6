@@ -1,47 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:orientation="vertical"
     tools:context="com.instamojo.androidsdksample.login">
-     />
-
-    <EditText
-        android:id="@+id/NAME"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="textPersonName"
-        android:hint="Name"
-        android:layout_above="@+id/password"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp" />
 
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="password"
-        android:gravity="center"
-        android:inputType="textPassword"
-        android:layout_alignBottom="@+id/Register"
-        android:layout_alignLeft="@+id/NAME"
-        android:layout_alignStart="@+id/NAME"
-        android:layout_marginBottom="78dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        >
 
-    <Button
-        android:id="@+id/Register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="16dp">
 
 
-</RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/grp_ssosid"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:background="@drawable/et_back"
+            >
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_user"
+                />
+            <EditText
+                android:id="@+id/NAME"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingBottom="14dp"
+                android:paddingTop="14dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="8dp"
+                android:inputType="textPersonName"
+                android:hint="Enter SSOSID"
+                android:background="@null"
+                android:layout_above="@+id/password"
+                android:layout_centerHorizontal="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/grp_pass"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/et_back"
+            android:layout_below="@+id/grp_ssosid"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_lock"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+91 -"
+                android:layout_marginLeft="12dp"
+                android:textSize="18sp"
+                />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingBottom="14dp"
+                android:paddingTop="14dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@null"
+                android:hint="Mobile Number"
+            />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Login with Bhamashah"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/primary_color"
+            android:layout_marginTop="28dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/grp_pass"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnLogin"
+            android:layout_marginTop="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Don't have Bhamashah account?"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/txt_register"
+                android:text="Click here to register"
+                android:textColor="@color/primary_color"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
