@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -37,9 +38,10 @@ import org.json.JSONObject;
 
 public class QRScanningActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
-    Button scan_qr;
-    Button endTrip;
+    RelativeLayout scan_qr;
+    RelativeLayout endTrip;
     Button btnPay, btnSOS;
+    RelativeLayout layoutAfterStart, layoutBeforeStart;
 
     public static Context mContext;
 
@@ -191,17 +193,27 @@ public class QRScanningActivity extends AppCompatActivity implements GoogleApiCl
     private void fetch_vehicle_wifi_mac(final String chasis, String lat, String lon, String SSO) {
         //add volley in this for getting the mac address of the wifi
         String URL = "";
+
         if(Constants.tripStarted == false){
             URL = Constants.qr_send_url_to_get_ap + "?chesis=" + chasis+"&ssos=9818"+"&lat="+lat+"&lng="+lon;
+            progress.setMessage("Starting your trip...");
         }
         else if(Constants.tripStarted == true){
             URL = Constants.url_stop_trip + "?chesis=" + chasis+"&ssos=9818"+"&lat="+lat+"&lng="+lon;
+            progress.setMessage("Ending your trip...");
         }
+
+        progress.show();
 
         StringRequest stringReques = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //       progress.dismiss();
+
+                if(progress.isShowing()){
+                    progress.dismiss();
+                }
+
                 Display(response);
 
                 if(Constants.tripStarted == false) {
@@ -241,12 +253,16 @@ public class QRScanningActivity extends AppCompatActivity implements GoogleApiCl
             endTrip.setVisibility(View.INVISIBLE);
             btnPay.setVisibility(View.INVISIBLE);
             btnSOS.setVisibility(View.INVISIBLE);
+            layoutBeforeStart.setVisibility(View.VISIBLE);
+            layoutAfterStart.setVisibility(View.INVISIBLE);
         }
         else if(Constants.tripStarted == true){
             scan_qr.setVisibility(View.INVISIBLE);
             endTrip.setVisibility(View.VISIBLE);
             btnPay.setVisibility(View.VISIBLE);
             btnSOS.setVisibility(View.VISIBLE);
+            layoutAfterStart.setVisibility(View.VISIBLE);
+            layoutBeforeStart.setVisibility(View.INVISIBLE);
         }
 
     }
@@ -256,10 +272,13 @@ public class QRScanningActivity extends AppCompatActivity implements GoogleApiCl
     }
 
     private void initialize() {
-        scan_qr = (Button) findViewById(R.id.scan_qr);
-        endTrip = (Button) findViewById(R.id.end_trip);
+        scan_qr = (RelativeLayout) findViewById(R.id.scan_qr);
+        endTrip = (RelativeLayout) findViewById(R.id.end_trip);
         btnPay = (Button) findViewById(R.id.pay);
         btnSOS = (Button) findViewById(R.id.sos);
+        layoutAfterStart = (RelativeLayout) findViewById(R.id.layout_after_start);
+        layoutBeforeStart = (RelativeLayout) findViewById(R.id.layout_before_start);
+
         qrscan = new IntentIntegrator(this);
         progress = new ProgressDialog(this);
         mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build();
@@ -329,7 +348,7 @@ public class QRScanningActivity extends AppCompatActivity implements GoogleApiCl
 
         else
         {
-            Toast.makeText(this, "Couldnt Fetch Location, Retrying again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Could'nt Fetch Location, Retrying again", Toast.LENGTH_SHORT).show();
             return null;
         }
 

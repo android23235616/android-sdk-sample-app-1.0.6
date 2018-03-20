@@ -7,89 +7,26 @@
     tools:context=".QRScanningActivity">
 
 
-
-    <RelativeLayout
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/grp_qr"
-        >
+        android:src="@drawable/back_taxi"
+        android:scaleType="centerCrop"
+        />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/back_taxi"
-            android:scaleType="centerCrop"
-            />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_back_qr"
-            android:scaleType="fitXY"
-            android:alpha="0.90"
-            />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_back_qr2"
+        android:scaleType="fitXY"
+        android:alpha="0.90"
+        />
 
 
 
-        <Button
-            android:id="@+id/scan_qr"
-            android:textSize="36dp"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:textColor="@android:color/white"
-            android:background = "@drawable/back_btn_qr"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Scan QR"
-            android:elevation="10dp"
-            android:textAllCaps="false"
-            />
+    <include layout="@layout/layout_before_start"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="To start a trip, please tap the button \nand scan the QR Code"
-            android:textColor="@android:color/white"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:layout_above="@+id/scan_qr"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="60dp"
-            />
-
-
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/end_trip"
-        android:textSize="20dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="END TRIP" />
-
-    <Button
-        android:id="@+id/pay"
-        android:textSize="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_below="@id/end_trip"
-        android:layout_centerHorizontal="true"
-        android:text="PAY ONLINE" />
-
-
-
-    <Button
-        android:id="@+id/sos"
-        android:textSize="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_below="@id/pay"
-        android:layout_centerHorizontal="true"
-        android:text="SOS" />
-
-
+    <include layout="@layout/layout_after_start"/>
 
 
 
