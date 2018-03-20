@@ -7,6 +7,7 @@ public class Constants {
     public static String url_registration="http://android23235616.pythonanywhere.com/passenger";
     public static String url_sos="http://android23235616.pythonanywhere.com/sos";
 
+
     public static String vehicleMAC = null;
     public static String CHASSIS = null;
 

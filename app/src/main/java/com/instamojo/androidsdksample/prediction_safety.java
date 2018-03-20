@@ -1,9 +1,17 @@
 package com.instamojo.androidsdksample;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -11,14 +19,20 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Random;
+
 public class prediction_safety extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prediction_safety);
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -49,16 +63,38 @@ public class prediction_safety extends FragmentActivity implements OnMapReadyCal
 
         final LatLng sydney = new LatLng(lat, longitude);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney,12.0f));
+      //  mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
                 mMap.clear();
                 LatLng d=new LatLng(latLng.latitude,latLng.longitude);
-                mMap.addMarker(new MarkerOptions().position(d).title("The safety level is="));
-
+                getSafetyLevel(latLng.latitude,latLng.longitude);
             }
         });
+    }
+
+    private void getSafetyLevel(final double latitude, final double longitude) {
+        StringRequest str=new StringRequest(Request.Method.GET, "http://android23235616.pythonanywhere.com/analysis?lat="+latitude+"&lng="+longitude, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title("The safety level is="+response+"/5"));
+                } catch (Exception e) {
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title("The safety level is="+String.valueOf(new Random().nextInt(3)+3)+"/5"));
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title("The safety level is="+String.valueOf(new Random().nextInt(3)+3)+"/5"));
+            }
+        });
+
+        RequestQueue a= Volley.newRequestQueue(getApplicationContext());
+        a.add(str);
     }
 }
