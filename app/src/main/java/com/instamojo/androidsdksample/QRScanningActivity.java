@@ -16,6 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -44,7 +45,8 @@ public class QRScanningActivity extends AppCompatActivity implements GoogleApiCl
 
     RelativeLayout scan_qr;
     RelativeLayout endTrip;
-    Button btnPay, btnSOS,prediction;
+    Button btnPay, btnSOS;
+    ImageView prediction;
     RelativeLayout layoutAfterStart, layoutBeforeStart;
 
     public static Context mContext;
@@ -297,7 +299,7 @@ public class QRScanningActivity extends AppCompatActivity implements GoogleApiCl
         btnSOS = (Button) findViewById(R.id.sos);
         layoutAfterStart = (RelativeLayout) findViewById(R.id.layout_after_start);
         layoutBeforeStart = (RelativeLayout) findViewById(R.id.layout_before_start);
-        prediction=(Button) findViewById(R.id.prediction);
+        prediction=(ImageView) findViewById(R.id.prediction);
         qrscan = new IntentIntegrator(this);
         progress = new ProgressDialog(this);
         mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build();

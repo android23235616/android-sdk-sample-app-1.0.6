@@ -70,7 +70,16 @@
         android:text="SOS" />
 
 
-
+    <ImageView
+        android:id="@+id/prediction"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignLeft="@+id/imageView3"
+        android:layout_alignStart="@+id/imageView3"
+        android:layout_alignTop="@+id/imageView2"
+        android:src="@drawable/ic_map_pin"
+        android:clickable="true"
+         />
 
 
 </RelativeLayout>
