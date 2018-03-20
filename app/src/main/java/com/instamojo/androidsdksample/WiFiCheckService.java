@@ -284,4 +284,5 @@ public class WiFiCheckService extends Service implements GoogleApiClient.Connect
         //doIn a=new doIn();
         //a.execute();
     }
+
 }

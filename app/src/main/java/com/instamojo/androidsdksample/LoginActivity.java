@@ -8,8 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.KeyListener;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,11 +26,10 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.net.InetAddress;
 
-public class login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     //phone number
     //email
     //name
@@ -70,9 +67,9 @@ public class login extends AppCompatActivity {
                         //fetchBhamashah(username, mobile);
                         if(username.equals(TEST_USERNAME)){
 
-                            //Toast.makeText(login.this, "Name: "+TEST_NAME+"\nMobile: " + TEST_MOBILE, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(LoginActivity.this, "Name: "+TEST_NAME+"\nMobile: " + TEST_MOBILE, Toast.LENGTH_LONG).show();
                             //mobileLogin(username, TEST_MOBILE);
-                            startActivity(new Intent(login.this, QRScanningActivity.class));
+                            startActivity(new Intent(LoginActivity.this, QRScanningActivity.class));
 
                         }
                         else {
@@ -101,7 +98,7 @@ public class login extends AppCompatActivity {
         txtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(login.this, registration.class));
+                startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
             }
         });
 
@@ -134,7 +131,7 @@ public class login extends AppCompatActivity {
 
     private void mobileLogin(final String username, final String mobile) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(login.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
         builder.setTitle("Message");
         builder.setMessage("OTP will be sent to +91-" + mobile + " for verification. Do you want to continue?");
         builder.setPositiveButton("PROCEED", new DialogInterface.OnClickListener() {
@@ -163,7 +160,7 @@ public class login extends AppCompatActivity {
         StringRequest rq = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(login.this, response, Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
                 if(progress.isShowing())
                 {
                     progress.dismiss();
@@ -174,7 +171,7 @@ public class login extends AppCompatActivity {
                     String aadharID = details.getString("AADHAR_ID");
                     String name = details.getString("NAME_ENG");
                     String mobile = details.getString("MOBILE_NO");
-                    Toast.makeText(login.this, "Mobile: "+mobile+"\nName: "+name, Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Mobile: "+mobile+"\nName: "+name, Toast.LENGTH_LONG).show();
                     
                     mobileLogin(username, mobile);
 
@@ -187,11 +184,11 @@ public class login extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(login.this, error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_LONG).show();
             }
         });
 
-        RequestQueue q = Volley.newRequestQueue(login.this);
+        RequestQueue q = Volley.newRequestQueue(LoginActivity.this);
         q.add(rq);
 
     }
@@ -218,14 +215,14 @@ public class login extends AppCompatActivity {
                     String s=a.getString("type");
                     if(s.equalsIgnoreCase("success"))
                     {
-                        Toast.makeText(login.this, "OTP SENT SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "OTP SENT SUCCESSFULLY", Toast.LENGTH_SHORT).show();
                         loginLayout.setVisibility(View.GONE);
                         otpLayout.setVisibility(View.VISIBLE);
                         txtMobile.setText(mobile);
                     }
                     else
                     {
-                        Toast.makeText(login.this, "Please Try Internet Connection", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Please Try Internet Connection", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
@@ -239,7 +236,7 @@ public class login extends AppCompatActivity {
                 {
                     progress.dismiss();
                 }
-                Toast.makeText(login.this, error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -265,7 +262,7 @@ public class login extends AppCompatActivity {
                 try {
                     JSONObject a=new JSONObject(response);
                     String d=a.getString("type");
-                    Toast.makeText(login.this, d, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, d, Toast.LENGTH_SHORT).show();
                         if(d.equals("success"))
                     {
                         Intent a1=new Intent(getApplicationContext(),QRScanningActivity.class);
@@ -273,7 +270,7 @@ public class login extends AppCompatActivity {
                         finish();
                     }
                     else{
-                        Toast.makeText(login.this, "OTP IS NOT CORRECT OR IT IS EXPIRED", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "OTP IS NOT CORRECT OR IT IS EXPIRED", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -327,49 +324,4 @@ public class login extends AppCompatActivity {
         progress=new ProgressDialog(this);
         progress.setMessage("Please wait.");
     }
-
-
-    /*
-    private void fetchBhamashah(final String familyID, final String mobile) {
-
-        Toast.makeText(this, "Bhamashah Mode1", Toast.LENGTH_SHORT).show();
-
-        String URL = "https://apitest.sewadwaar.rajasthan.gov.in/app/live/Service/hofAndMember/ForApp/"+familyID+"?client_id=ad7288a4-7764-436d-a727-783a977f1fe1";
-        StringRequest req = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if(progress.isShowing())
-                {
-                    progress.dismiss();
-                }
-                try {
-                    JSONObject a=new JSONObject(response);
-                    JSONObject details = a.getJSONObject("hof_details");
-                    String aadharID = details.getString("AADHAR_ID");
-                    String name = details.getString("NAME_ENG");
-                    String mobile = details.getString("MOBILE_NO");
-                    Toast.makeText(login.this, "Mobile: "+mobile+"\nName: "+name, Toast.LENGTH_LONG).show();
-                    //mobileLogin(username, mobile);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                if(progress.isShowing())
-                {
-                    progress.dismiss();
-                }
-                Toast.makeText(login.this, error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        RequestQueue queue=Volley.newRequestQueue(this);
-        queue.add(req);
-    }
-
-    */
 }
