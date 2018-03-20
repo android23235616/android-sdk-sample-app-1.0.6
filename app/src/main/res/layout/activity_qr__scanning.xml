@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".QRScanningActivity">
 
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,8 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_back_qr"
-            android:scaleType="centerCrop"
-            android:alpha="0.85"
+            android:scaleType="fitXY"
+            android:alpha="0.90"
             />
 
 
@@ -43,6 +45,18 @@
             android:textAllCaps="false"
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To start a trip, please tap the button \nand scan the QR Code"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:layout_above="@+id/scan_qr"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="60dp"
+            />
+
 
     </RelativeLayout>
 
@@ -51,8 +65,8 @@
         android:textSize="20dp"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/grp_qr"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:text="END TRIP" />
 
     <Button
@@ -64,5 +78,37 @@
         android:layout_centerHorizontal="true"
         android:text="PAY ONLINE" />
 
+
+
+    <Button
+        android:id="@+id/sos"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_below="@id/pay"
+        android:layout_centerHorizontal="true"
+        android:text="SOS" />
+
+
+
+
+
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_placeholder2"
+        />
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_bhamashah_small"
+        />
 
 </RelativeLayout>
