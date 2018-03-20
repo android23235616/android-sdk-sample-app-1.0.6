@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layout_after_start"
-    android:visibility="invisible"
+    android:visibility="visible"
     android:padding="16dp"
     >
 
@@ -32,15 +32,27 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To end your trip, please tap the button."
+        android:gravity="center"
+        android:textSize="14sp"
+        android:id="@+id/txt1"
+        android:layout_below="@+id/end_trip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        />
+
     <Button
         android:id="@+id/pay"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@id/end_trip"
+        android:layout_below="@id/txt1"
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@android:color/white"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="PAY ONLINE" />
 
 
@@ -48,15 +60,16 @@
     <Button
         android:id="@+id/sos"
         android:textSize="28dp"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:background="@drawable/back_end_trip"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-
         android:text="SOS" />
+
+
 
 
 

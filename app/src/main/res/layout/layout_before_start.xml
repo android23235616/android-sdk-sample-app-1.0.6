@@ -42,12 +42,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="To start a trip, please tap the button \nand scan the QR Code"
-            android:textColor="@android:color/white"
             android:gravity="center"
-            android:textSize="16sp"
-            android:layout_above="@+id/scan_qr"
+            android:textSize="14sp"
+            android:layout_below="@+id/scan_qr"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="56dp"
+            android:layout_marginTop="28dp"
             />
 
 
