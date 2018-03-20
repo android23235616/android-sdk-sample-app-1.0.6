@@ -130,7 +130,6 @@ public class login extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void mobileLogin(final String username, final String mobile) {
@@ -254,9 +253,10 @@ public class login extends AppCompatActivity {
         {
             progress.dismiss();
         }
+        Toast.makeText(this, mobile+"\n"+otp, Toast.LENGTH_SHORT).show();
         progress.setMessage("Verifying OTP.Please Wait");
         progress.show();
-        StringRequest st=new StringRequest(Request.Method.GET, "https://control.msg91.com/api/verifyRequestOTP.php?authkey=204505AOZvMjzt5aaff3e5&mobile=" + mobile + "&otp=" + otp, new Response.Listener<String>() {
+        StringRequest st=new StringRequest(Request.Method.GET, "https://control.msg91.com/api/verifyRequestOTP.php?authkey=204505AOZvMjzt5aaff3e5&mobile="+mobile+"&otp="+ otp, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(progress.isShowing())
@@ -265,11 +265,12 @@ public class login extends AppCompatActivity {
                 try {
                     JSONObject a=new JSONObject(response);
                     String d=a.getString("type");
-                    if(d.equalsIgnoreCase("success"))
+                    Toast.makeText(login.this, d, Toast.LENGTH_SHORT).show();
+                        if(d.equals("success"))
                     {
                         Intent a1=new Intent(getApplicationContext(),QRScanningActivity.class);
-                        a1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(a1);
+                        finish();
                     }
                     else{
                         Toast.makeText(login.this, "OTP IS NOT CORRECT OR IT IS EXPIRED", Toast.LENGTH_SHORT).show();
