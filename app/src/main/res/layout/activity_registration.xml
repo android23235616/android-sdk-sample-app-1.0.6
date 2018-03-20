@@ -1,17 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.instamojo.androidsdksample.registration">
 
     <include layout="@layout/my_toolbar" android:id="@+id/toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:background="@color/colorPrimary"
+        >
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/logo"
+            android:layout_centerVertical="true"
+            android:layout_above="@+id/txt_avatar"
+            android:src="@drawable/ic_placeholder"
+
+            />
+
+   <!--     <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:id="@+id/txt_avatar"
+            android:layout_marginBottom="48dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_alignParentBottom="true"
+            android:text="Advanced Vehicle Tracking and\nAgile Recovery System \n(AVTAR)"
+            />
+
+        -->
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_weight="1"
         android:padding="16dp"
         android:layout_below="@+id/toolbar"
         >
@@ -20,7 +57,6 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             >
             <EditText
                 android:id="@+id/name"
@@ -37,13 +73,12 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="8dp">
 
             <EditText
                 android:id="@+id/aadhar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="26dp"
                 android:ems="12"
                 android:hint="Aadhar Number"
                 android:inputType="phone"
@@ -55,12 +90,11 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="8dp">
             <EditText
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 android:ems="10"
                 android:hint="Mobile number"
                 android:inputType="textPostalAddress"
@@ -72,7 +106,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="8dp">
 
             <EditText
                 android:id="@+id/username"
@@ -97,8 +131,8 @@
             android:text="Register"
             android:layout_below="@+id/username"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="76dp" />
+            android:layout_marginTop="28dp" />
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

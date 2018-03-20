@@ -21,9 +21,10 @@
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:id="@+id/logo"
+            android:layout_marginTop="16dp"
             android:layout_above="@+id/txt_avatar"
             android:src="@drawable/ic_placeholder"
-            android:layout_marginBottom="28dp"
+            android:layout_marginBottom="16dp"
             />
 
         <TextView
@@ -32,7 +33,7 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:id="@+id/txt_avatar"
-            android:layout_marginBottom="48dp"
+            android:layout_marginBottom="36dp"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:textSize="20dp"
