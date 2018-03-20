@@ -33,18 +33,30 @@
                 />
             <EditText
                 android:id="@+id/name"
-                android:layout_width="match_parent"
+                android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:paddingBottom="14dp"
                 android:paddingTop="14dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="8dp"
+                android:maxLength="20"
+                android:layout_weight="1"
                 android:inputType="textPersonName"
                 android:hint="AVTAR Username/Bhamashah ID"
                 android:background="@null"
                 android:layout_above="@+id/password"
                 android:layout_centerHorizontal="true" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:src="@drawable/ic_bhamashah_small"
+                android:id="@+id/img_bhamashah"
+                />
 
         </LinearLayout>
 
