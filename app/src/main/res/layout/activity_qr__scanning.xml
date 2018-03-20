@@ -28,7 +28,7 @@
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_circle_profile_img"
+        android:src="@drawable/profile_pic_round"
         android:id="@+id/imageView2" />
 
     <include layout="@layout/layout_before_start"/>
