@@ -43,7 +43,7 @@
                 android:maxLength="20"
                 android:layout_weight="1"
                 android:inputType="textPersonName"
-                android:hint="AVTAR Username/Bhamashah ID"
+                android:hint="AVTAR ID/Bhamashah Family ID"
                 android:background="@null"
                 android:layout_above="@+id/password"
                 android:layout_centerHorizontal="true" />

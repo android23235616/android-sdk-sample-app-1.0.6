@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ public class login extends AppCompatActivity {
     ProgressDialog progress;
     TextView txtMobile, txtRegister;
     ImageView imgBhamashah;
+    LinearLayout grpMobile;
     
     final String TEST_USERNAME = "VPRANSH";
     final String TEST_MOBILE = "7064002332";
@@ -112,9 +114,13 @@ public class login extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(etUserName.getText().toString().length() == 7 && !etUserName.getText().toString().startsWith("av")){
                     imgBhamashah.setVisibility(View.VISIBLE);
+                    grpMobile.setVisibility(View.INVISIBLE);
+                    btnLogin.setText("Login using Bhamashah");
                 }
                 else {
                     imgBhamashah.setVisibility(View.GONE);
+                    grpMobile.setVisibility(View.VISIBLE);
+                    btnLogin.setText("Login to AVTAR");
                 }
             }
 
@@ -311,6 +317,7 @@ public class login extends AppCompatActivity {
         txtMobile = (TextView) findViewById(R.id.txt_mobile);
         txtRegister = (TextView) findViewById(R.id.txt_register);
         imgBhamashah = (ImageView)findViewById(R.id.img_bhamashah);
+        grpMobile = (LinearLayout)findViewById(R.id.grp_pass);
 
         // Set visibilities:
         loginLayout.setVisibility(View.VISIBLE);
