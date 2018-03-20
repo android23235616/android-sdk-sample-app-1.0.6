@@ -70,8 +70,9 @@ public class login extends AppCompatActivity {
                         //fetchBhamashah(username, mobile);
                         if(username.equals(TEST_USERNAME)){
 
-                            Toast.makeText(login.this, "Name: "+TEST_NAME+"\nMobile: " + TEST_MOBILE, Toast.LENGTH_LONG).show();
-                            mobileLogin(username, TEST_MOBILE);
+                            //Toast.makeText(login.this, "Name: "+TEST_NAME+"\nMobile: " + TEST_MOBILE, Toast.LENGTH_LONG).show();
+                            //mobileLogin(username, TEST_MOBILE);
+                            startActivity(new Intent(login.this, QRScanningActivity.class));
 
                         }
                         else {
