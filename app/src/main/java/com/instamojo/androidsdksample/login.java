@@ -39,7 +39,7 @@ public class login extends AppCompatActivity {
     //mobile number
     EditText etMobile,etUserName,etOTP;
     Button btnLogin, btnVerifyOTP;
-    String username, mobile;
+    String username, mMobile;
     RelativeLayout loginLayout, otpLayout;
     ProgressDialog progress;
     TextView txtMobile, txtRegister;
@@ -64,7 +64,7 @@ public class login extends AppCompatActivity {
                 if(!check_internet_connection())
                 {
                     username = etUserName.getText().toString();
-                    mobile = etMobile.getText().toString();
+                    mMobile = etMobile.getText().toString();
 
                     if(!username.startsWith("av")){
                         //fetchBhamashah(username, mobile);
@@ -80,7 +80,7 @@ public class login extends AppCompatActivity {
                     }
                     else {
 
-                        mobileLogin(username, mobile);
+                        mobileLogin(username, mMobile);
 
                     }
 
@@ -93,7 +93,7 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String otp = etOTP.getText().toString();
-                verifyOTP(mobile, otp);
+                verifyOTP(mMobile, otp);
             }
         });
 
