@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.wifi.WifiManager;
@@ -36,11 +37,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Map;
+import java.util.Set;
+
 public class QRScanningActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     RelativeLayout scan_qr;
     RelativeLayout endTrip;
-    Button btnPay, btnSOS;
+    Button btnPay, btnSOS,prediction;
     RelativeLayout layoutAfterStart, layoutBeforeStart;
 
     public static Context mContext;
@@ -136,6 +140,15 @@ public class QRScanningActivity extends AppCompatActivity implements GoogleApiCl
                 q.add(rq);
             }
         });
+
+        prediction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a=new Intent(getApplicationContext(),prediction_safety.class);
+                a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(a);
+            }
+        });
     }
 
     private void endPassengerTrip() {
@@ -193,6 +206,12 @@ public class QRScanningActivity extends AppCompatActivity implements GoogleApiCl
     private void fetch_vehicle_wifi_mac(final String chasis, String lat, String lon, String SSO) {
         //add volley in this for getting the mac address of the wifi
         String URL = "";
+
+        SharedPreferences a=getSharedPreferences("LAT",MODE_PRIVATE);
+        SharedPreferences.Editor edit=a.edit();
+        edit.putString("lat",lat);
+        edit.putString("lon",lon);
+        edit.apply();
 
         if(Constants.tripStarted == false){
             URL = Constants.qr_send_url_to_get_ap + "?chesis=" + chasis+"&ssos=9818"+"&lat="+lat+"&lng="+lon;
@@ -278,7 +297,7 @@ public class QRScanningActivity extends AppCompatActivity implements GoogleApiCl
         btnSOS = (Button) findViewById(R.id.sos);
         layoutAfterStart = (RelativeLayout) findViewById(R.id.layout_after_start);
         layoutBeforeStart = (RelativeLayout) findViewById(R.id.layout_before_start);
-
+        prediction=(Button) findViewById(R.id.prediction);
         qrscan = new IntentIntegrator(this);
         progress = new ProgressDialog(this);
         mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build();
